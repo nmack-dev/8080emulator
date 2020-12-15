@@ -22,7 +22,7 @@ def csv_to_code(file):
             code_str += row[1]
 
             if (row[2] is ''):
-                code_str += '\"); break;'
+                code_str += '\\n\"); break;'
             
             else:
                 while (len(code_str) is not 26):
@@ -38,18 +38,18 @@ def csv_to_code(file):
 
                 # Case for 1 byte instuction
                 if (row[3] is '1'):
-                    code_str += '\"); break;'
+                    code_str += '\\n\"); break;'
                 
                 # Case for 2 byte instruction
                 elif(row[3] is '2'):
-                    code_str += ',#$%02x\", code[1]); opbytes=2; break;'
+                    code_str += ',#$%02x\\n\", code[1]); opbytes=2; break;'
                 
                 # Case for 3 byte instruction
                 elif(row[3] is '3'):
-                    code_str += ',#$%02x%02x", code[2], code[1]); opbytes=3; break;'
+                    code_str += ',#$%02x%02x\\n", code[2], code[1]); opbytes=3; break;'
         
         else:
-            code_str += 'NOP\"); break;'
+            code_str += 'NOP\\n\"); break;'
         
         print(code_str)
 
