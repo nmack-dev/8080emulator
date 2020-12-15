@@ -1,0 +1,256 @@
+0x00\'a0	NOP		1\
+0x01\'a0	LXI	B,D16	3\
+0x02\'a0	STAX	B	1\
+0x03\'a0	INX	B	1\
+0x04\'a0	INR	B	1\
+0x05\'a0	DCR	B	1\
+0x06\'a0	MVI	B,D8	2\
+0x07\'a0	RLC		1\
+0x08\'a0	-		\
+0x09\'a0	DAD	B	1\
+0x0a\'a0	LDAX	B	1\
+0x0b\'a0	DCX	B	1\
+0x0c\'a0	INR	C	1\
+0x0d\'a0	DCR	C	1\
+0x0e\'a0	MVI	C,D8	2\
+0x0f\'a0	RRC		1\
+0x10\'a0	-		\
+0x11\'a0	LXI	D,D16	3\
+0x12\'a0	STAX	D	1\
+0x13\'a0	INX	D	1\
+0x14\'a0	INR	D	1\
+0x15\'a0	DCR	D	1\
+0x16\'a0	MVI	D,D8	2\
+0x17\'a0	RAL		1\
+0x18\'a0	-		\
+0x19\'a0	DAD	D	1\
+0x1a\'a0	LDAX	D	1\
+0x1b\'a0	DCX	D	1\
+0x1c\'a0	INR	E	1\
+0x1d\'a0	DCR	E	1\
+0x1e\'a0	MVI	E,D8	2\
+0x1f\'a0	RAR		1\
+0x20\'a0	-		\
+0x21\'a0	LXI	H,D16	3\
+0x22\'a0	SHLD	adr	3\
+0x23\'a0	INX	H	1\
+0x24\'a0	INR	H	1\
+0x25\'a0	DCR	H	1\
+0x26\'a0	MVI	H,D8	2\
+0x27\'a0	DAA		1\
+0x28\'a0	-		\
+0x29\'a0	DAD	H	1\
+0x2a\'a0	LHLD	adr	3\
+0x2b\'a0	DCX	H	1\
+0x2c\'a0	INR	L	1\
+0x2d\'a0	DCR	L	1\
+0x2e\'a0	MVI	L,D8	2\
+0x2f\'a0	CMA		1\
+0x30\'a0	-		\
+0x31\'a0	LXI	SP,D16 3\
+0x32\'a0	STA	adr	3\
+0x33\'a0	INX	SP	1\
+0x34\'a0	INR	M	1\
+0x35\'a0	DCR	M	1\
+0x36\'a0	MVI	M,D8	2\
+0x37\'a0	STC		1\
+0x38\'a0	-		\
+0x39\'a0	DAD	SP	1\
+0x3a\'a0	LDA	adr	3\
+0x3b\'a0	DCX	SP	1\
+0x3c\'a0	INR	A	1\
+0x3d\'a0	DCR	A	1\
+0x3e\'a0	MVI	A,D8	2\
+0x3f\'a0	CMC		1\
+0x40\'a0	MOV	B,B	1\
+0x41\'a0	MOV	B,C	1\
+0x42\'a0	MOV	B,D	1\
+0x43\'a0	MOV	B,E	1\
+0x44\'a0	MOV	B,H	1\
+0x45\'a0	MOV	B,L	1\
+0x46\'a0	MOV	B,M	1\
+0x47\'a0	MOV	B,A	1\
+0x48\'a0	MOV	C,B	1\
+0x49\'a0	MOV	C,C	1\
+0x4a\'a0	MOV	C,D	1\
+0x4b\'a0	MOV	C,E	1\
+0x4c\'a0	MOV	C,H	1\
+0x4d\'a0	MOV	C,L	1\
+0x4e\'a0	MOV	C,M	1\
+0x4f\'a0	MOV	C,A	1\
+0x50\'a0	MOV	D,B	1\
+0x51\'a0	MOV	D,C	1\
+0x52\'a0	MOV	D,D	1\
+0x53\'a0	MOV	D,E	1\
+0x54\'a0	MOV	D,H	1\
+0x55\'a0	MOV	D,L	1\
+0x56\'a0	MOV	D,M	1\
+0x57\'a0	MOV	D,A	1\
+0x58\'a0	MOV	E,B	1\
+0x59\'a0	MOV	E,C	1\
+0x5a\'a0	MOV	E,D	1\
+0x5b\'a0	MOV	E,E	1\
+0x5c\'a0	MOV	E,H	1\
+0x5d\'a0	MOV	E,L	1\
+0x5e\'a0	MOV	E,M	1\
+0x5f\'a0	MOV	E,A	1\
+0x60\'a0	MOV	H,B	1\
+0x61\'a0	MOV	H,C	1\
+0x62\'a0	MOV	H,D	1\
+0x63\'a0	MOV	H,E	1\
+0x64\'a0	MOV	H,H	1\
+0x65\'a0	MOV	H,L	1\
+0x66\'a0	MOV	H,M	1\
+0x67\'a0	MOV	H,A	1\
+0x68\'a0	MOV	L,B	1\
+0x69\'a0	MOV	L,C	1\
+0x6a\'a0	MOV	L,D	1\
+0x6b\'a0	MOV	L,E	1\
+0x6c\'a0	MOV	L,H	1\
+0x6d\'a0	MOV	L,L	1\
+0x6e\'a0	MOV	L,M	1\
+0x6f\'a0	MOV	L,A	1\
+0x70\'a0	MOV	M,B	1\
+0x71\'a0	MOV	M,C	1\
+0x72\'a0	MOV	M,D	1\
+0x73\'a0	MOV	M,E	1\
+0x74\'a0	MOV	M,H	1\
+0x75\'a0	MOV	M,L	1\
+0x76\'a0	HLT		1\
+0x77\'a0	MOV	M,A	1\
+0x78\'a0	MOV	A,B	1\
+0x79\'a0	MOV	A,C	1\
+0x7a\'a0	MOV	A,D	1\
+0x7b\'a0	MOV	A,E	1\
+0x7c\'a0	MOV	A,H	1\
+0x7d\'a0	MOV	A,L	1\
+0x7e\'a0	MOV	A,M	1\
+0x7f\'a0	MOV	A,A	1\
+0x80\'a0	ADD	B	1\
+0x81\'a0	ADD	C	1\
+0x82\'a0	ADD	D	1\
+0x83\'a0	ADD	E	1\
+0x84\'a0	ADD	H	1\
+0x85\'a0	ADD	L	1\
+0x86\'a0	ADD	M	1\
+0x87\'a0	ADD	A	1\
+0x88\'a0	ADC	B	1\
+0x89\'a0	ADC	C	1\
+0x8a\'a0	ADC	D	1\
+0x8b\'a0	ADC	E	1\
+0x8c\'a0	ADC	H	1\
+0x8d\'a0	ADC	L	1\
+0x8e\'a0	ADC	M	1\
+0x8f\'a0	ADC	A	1\
+0x90\'a0	SUB	B	1\
+0x91\'a0	SUB	C	1\
+0x92\'a0	SUB	D	1\
+0x93\'a0	SUB	E	1\
+0x94\'a0	SUB	H	1\
+0x95\'a0	SUB	L	1\
+0x96\'a0	SUB	M	1\
+0x97\'a0	SUB	A	1\
+0x98\'a0	SBB	B	1\
+0x99\'a0	SBB	C	1\
+0x9a\'a0	SBB	D	1\
+0x9b\'a0	SBB	E	1\
+0x9c\'a0	SBB	H	1\
+0x9d\'a0	SBB	L	1\
+0x9e\'a0	SBB	M	1\
+0x9f\'a0	SBB	A	1\
+0xa0\'a0	ANA	B	1\
+0xa1\'a0	ANA	C	1\
+0xa2\'a0	ANA	D	1\
+0xa3\'a0	ANA	E	1\
+0xa4\'a0	ANA	H	1\
+0xa5\'a0	ANA	L	1\
+0xa6\'a0	ANA	M	1\
+0xa7\'a0	ANA	A	1\
+0xa8\'a0	XRA	B	1\
+0xa9\'a0	XRA	C	1\
+0xaa\'a0	XRA	D	1\
+0xab\'a0	XRA	E	1\
+0xac\'a0	XRA	H	1\
+0xad\'a0	XRA	L	1\
+0xae\'a0	XRA	M	1\
+0xaf\'a0	XRA	A	1\
+0xb0\'a0	ORA	B	1\
+0xb1\'a0	ORA	C	1\
+0xb2\'a0	ORA	D	1\
+0xb3\'a0	ORA	E	1\
+0xb4\'a0	ORA	H	1\
+0xb5\'a0	ORA	L	1\
+0xb6\'a0	ORA	M	1\
+0xb7\'a0	ORA	A	1\
+0xb8\'a0	CMP	B	1\
+0xb9\'a0	CMP	C	1\
+0xba\'a0	CMP	D	1\
+0xbb\'a0	CMP	E	1\
+0xbc\'a0	CMP	H	1\
+0xbd\'a0	CMP	L	1\
+0xbe\'a0	CMP	M	1\
+0xbf\'a0	CMP	A	1\
+0xc0\'a0	RNZ		1\
+0xc1\'a0	POP	B	1\
+0xc2\'a0	JNZ	adr	3\
+0xc3\'a0	JMP	adr	3\
+0xc4\'a0	CNZ	adr	3\
+0xc5\'a0	PUSH	B	1\
+0xc6\'a0	ADI	D8	2\
+0xc7\'a0	RST	0	1\
+0xc8\'a0	RZ		1\
+0xc9\'a0	RET		1\
+0xca\'a0	JZ	adr	3\
+0xcb\'a0	-		\
+0xcc\'a0	CZ	adr	3\
+0xcd\'a0	CALL	adr	3\
+0xce\'a0	ACI	D8	2\
+0xcf\'a0	RST	1	1\
+0xd0\'a0	RNC		1\
+0xd1\'a0	POP	D	1\
+0xd2\'a0	JNC	adr	3\
+0xd3\'a0	OUT	D8	2\
+0xd4\'a0	CNC	adr	3\
+0xd5\'a0	PUSH	D	1\
+0xd6\'a0	SUI	D8	2\
+0xd7\'a0	RST	2	1\
+0xd8\'a0	RC		1\
+0xd9\'a0	-		\
+0xda\'a0	JC	adr	3\
+0xdb\'a0	IN	D8	2\
+0xdc\'a0	CC	adr	3\
+0xdd\'a0	-		\
+0xde\'a0	SBI	D8	2\
+0xdf\'a0	RST	3	1\
+0xe0\'a0	RPO		1\
+0xe1\'a0	POP	H	1\
+0xe2\'a0	JPO	adr	3\
+0xe3\'a0	XTHL		1\
+0xe4\'a0	CPO	adr	3\
+0xe5\'a0	PUSH	H	1\
+0xe6\'a0	ANI	D8	2\
+0xe7\'a0	RST	4	1\
+0xe8\'a0	RPE		1\
+0xe9\'a0	PCHL		1\
+0xea\'a0	JPE	adr	3\
+0xeb\'a0	XCHG		1\
+0xec\'a0	CPE	adr	3\
+0xed\'a0	-		\
+0xee\'a0	XRI	D8	2\
+0xef\'a0	RST	5	1\
+0xf0\'a0	RP		1\
+0xf1\'a0	POP	PSW	1\
+0xf2\'a0	JP	adr	3\
+0xf3\'a0	DI		1\
+0xf4\'a0	CP	adr	3\
+0xf5\'a0	PUSH	PSW	1\
+0xf6\'a0	ORI	D8	2\
+0xf7\'a0	RST	6	1\
+0xf8\'a0	RM		1\
+0xf9\'a0	SPHL		1\
+0xfa\'a0	JM	adr	3\
+0xfb\'a0	EI		1\
+0xfc\'a0	CM	adr	3\
+0xfd\'a0	-		\
+0xfe\'a0	CPI	D8	2\
+0xff\'a0	RST	7	1}
