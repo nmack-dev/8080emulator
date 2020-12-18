@@ -3,14 +3,15 @@
 
 typedef struct conditionCodes
 {
-    uint8_t z:1;
-    uint8_t s:1;
-    uint8_t p:1;
-    uint8_t cy:1;
-    uint8_t ac:1;
+    uint8_t z:1;    // Zero flag
+    uint8_t s:1;    // Sign flag
+    uint8_t p:1;    // Parity flag
+    uint8_t cy:1;   // Cary flag
+    uint8_t ac:1;   // Auxillary carry flag
     uint8_t pad:1;
 } conditionCodes;
 
+// Basic data structure to represent an 8080 processor
 typedef struct state8080
 {
     uint8_t a;
@@ -27,11 +28,87 @@ typedef struct state8080
     uint8_t int_enable;
 } state8080;
 
+// Handles the case in which an instruction has not been implemented yet
 void unimplementedInstruction(state8080 *state)
 {
     state->pc -= 1;
     printf("Error: Unimplemented Instruction\n");
     exit(1);
+}
+
+// A function that sets flag bits after and instruction
+void setFlags(state8080 *state, uint16_t answer)
+{
+    // Sets zero flag to zero if answer is zero
+    state->cc.z = ((answer & 0xff) == 0);
+    
+    // Sets the sign flag if bit 7 is set
+    state->cc.s = ((answer & 0x80) != 0);
+
+    // Sets the carry flag if there is carry out
+    state->cc.cy = (answer > 0xff);
+
+    // Sets the parity flag to 1 (odd) or 0 (even)
+    state->cc.p = Parity(answer & 0xff);
+
+    // Checks the A register
+    state->a = answer & 0xff;
+}
+
+// A function that implements the ADD instruction for the emulation shell
+void add(state8080 *state, char register)
+{   
+    uint16_t answer;
+
+    switch(register)
+    {   
+        // Normal cases for the ADD instruction
+        case (register == 'b'): answer = (uint16_t)state->a + (uint16_t)state->b; break;
+        case (register == 'c'): answer = (uint16_t)state->a + (uint16_t)state->c; break;
+        case (register == 'd'): answer = (uint16_t)state->a + (uint16_t)state->d; break;
+        case (register == 'e'): answer = (uint16_t)state->a + (uint16_t)state->e; break;
+        case (register == 'h'): answer = (uint16_t)state->a + (uint16_t)state->h; break;
+        case (register == 'l'): answer = (uint16_t)state->a + (uint16_t)state->l; break;
+        case (register == 'a'): answer = (uint16_t)state->a + (uint16_t)state->a; break;
+
+        // Handles an ADD instruction in the memory form
+        case (register == 'm'):
+        {
+            uint16_t offset = (state->h<<8) | (state->l);
+            uint16_t answer = (uint16_t) state->a + state->memory[offset];
+            break;
+        }
+    }
+    
+    setFlags(state, answer);
+}
+
+// A function that implements the ADC instruction for the emulation shell
+void adc(state8080 *state, char register)
+{   
+    uint16_t answer;
+
+    switch(register)
+    {   
+        // Normal cases for the ADC instruction
+        case (register == 'b'): answer = (uint16_t)state->a + (uint16_t)state->b + (uint16_t)state->cc.cy; break;
+        case (register == 'c'): answer = (uint16_t)state->a + (uint16_t)state->c + (uint16_t)state->cc.cy; break;
+        case (register == 'd'): answer = (uint16_t)state->a + (uint16_t)state->d + (uint16_t)state->cc.cy; break;
+        case (register == 'e'): answer = (uint16_t)state->a + (uint16_t)state->e + (uint16_t)state->cc.cy; break;
+        case (register == 'h'): answer = (uint16_t)state->a + (uint16_t)state->h + (uint16_t)state->cc.cy; break;
+        case (register == 'l'): answer = (uint16_t)state->a + (uint16_t)state->l + (uint16_t)state->cc.cy; break;
+        case (register == 'a'): answer = (uint16_t)state->a + (uint16_t)state->a + (uint16_t)state->cc.cy; break;
+
+        // Handles an ADC instruction in the memory form
+        case (register == 'm'):
+        {
+            uint16_t offset = (state->h<<8) | (state->l);
+            uint16_t answer = (uint16_t) state->a + state->memory[offset] + (uint16_t)state->cc.cy;
+            break;
+        }
+    }
+    
+    setFlags(state, answer);
 }
 
 int emulate8080(state8080 *state)
@@ -40,12 +117,14 @@ int emulate8080(state8080 *state)
 
     switch(*opcode)
     {
-        case 0x00: break;                                   // NOP
-        case 0x01:                                          // LXI B,word
+        case 0x00: break; // NOP
+        case 0x01: // LXI B,word
+        {                                         
             state->c = opcode[1];
             state->b = opcode[2];
             state->pc += 2;
             break;
+        }
         case 0x02: unimplementedInstruction(state); break;
         case 0x03: unimplementedInstruction(state); break;
         case 0x04: unimplementedInstruction(state); break;
@@ -109,9 +188,9 @@ int emulate8080(state8080 *state)
         case 0x3e: unimplementedInstruction(state); break;
         case 0x3f: unimplementedInstruction(state); break;
         case 0x40: unimplementedInstruction(state); break;
-        case 0x41: state->b = state->c; break;              // MOV B,C
-        case 0x42: state->b = state->d; break;              // MOV B,D
-        case 0x43: state->b = state->e; break;              // MOV B,E
+        case 0x41: state->b = state->c; break; // MOV B,C
+        case 0x42: state->b = state->d; break; // MOV B,D
+        case 0x43: state->b = state->e; break; // MOV B,E
         case 0x44: unimplementedInstruction(state); break;
         case 0x45: unimplementedInstruction(state); break;
         case 0x46: unimplementedInstruction(state); break;
@@ -172,22 +251,22 @@ int emulate8080(state8080 *state)
         case 0x7d: unimplementedInstruction(state); break;
         case 0x7e: unimplementedInstruction(state); break;
         case 0x7f: unimplementedInstruction(state); break;
-        case 0x80: unimplementedInstruction(state); break;
-        case 0x81: unimplementedInstruction(state); break;
-        case 0x82: unimplementedInstruction(state); break;
-        case 0x83: unimplementedInstruction(state); break;
-        case 0x84: unimplementedInstruction(state); break;
-        case 0x85: unimplementedInstruction(state); break;
-        case 0x86: unimplementedInstruction(state); break;
-        case 0x87: unimplementedInstruction(state); break;
-        case 0x88: unimplementedInstruction(state); break;
-        case 0x89: unimplementedInstruction(state); break;
-        case 0x8a: unimplementedInstruction(state); break;
-        case 0x8b: unimplementedInstruction(state); break;
-        case 0x8c: unimplementedInstruction(state); break;
-        case 0x8d: unimplementedInstruction(state); break;
-        case 0x8e: unimplementedInstruction(state); break;
-        case 0x8f: unimplementedInstruction(state); break;
+        case 0x80: add(state, 'b'); break; // ADD B
+        case 0x81: add(state, 'c'); break; // ADD C                                   
+        case 0x82: add(state, 'd'); break; // ADD D                                        
+        case 0x83: add(state, 'e'); break; // ADD E                                           
+        case 0x84: add(state, 'h'); break; // ADD H                                        
+        case 0x85: add(state, 'l'); break; // ADD L                                          
+        case 0x86: add(state, 'm'); break; // ADD M                                        
+        case 0x87: add(state, 'a'); break; // ADD A                                         
+        case 0x88: adc(state, 'b'); break; // ADC B                                        
+        case 0x89: adc(state, 'c'); break; // ADC C                                          
+        case 0x8a: adc(state, 'd'); break; // ADC D                                        
+        case 0x8b: adc(state, 'e'); break; // ADC E                                            
+        case 0x8c: adc(state, 'h'); break; // ADC H                                            
+        case 0x8d: adc(state, 'l'); break; // ADC L                                           
+        case 0x8e: adc(state, 'm'); break; // ADC M                                            
+        case 0x8f: adc(state, 'a'); break; // ADC A                                          
         case 0x90: unimplementedInstruction(state); break;
         case 0x91: unimplementedInstruction(state); break;
         case 0x92: unimplementedInstruction(state); break;
